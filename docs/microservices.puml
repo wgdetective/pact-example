@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+User -> MusicService: GetNextComposition
+MusicService --> DB : GetAllowed
+MusicService <-- DB
+User <-- MusicService  : response
+
+MusicService <- GrantMusicService: produces changes \nin music compositions \naccessibility via kafka
+MusicService -> DB : Save changes
+@enduml
