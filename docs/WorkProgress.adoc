@@ -1,8 +1,7 @@
 = WorkProgress
 1) gradle config
 2) musicService
+
 3) grantMusicService
 
-docker
-spring rest docs
-test containers
+docker spring rest docs test containers

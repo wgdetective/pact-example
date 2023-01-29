@@ -27,10 +27,22 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.kafka:spring-kafka")
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    // TODO remove version
+    implementation("org.mapstruct:mapstruct:1.5.2.Final")
+
     compileOnly("org.projectlombok:lombok")
+
+    runtimeOnly("com.mysql:mysql-connector-j")
+    runtimeOnly("dev.miku:r2dbc-mysql:0.8.1.RELEASE")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.2.Final")
+
+    testAnnotationProcessor("org.mapstruct:mapstruct-processor:1.5.2.Final")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
@@ -38,6 +50,7 @@ dependencies {
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:kafka")
+    testRuntimeOnly("io.r2dbc:r2dbc-h2")
 }
 
 dependencyManagement {

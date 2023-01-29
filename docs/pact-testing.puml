@@ -3,11 +3,11 @@
 
 autonumber
 
-RestPactConsumer -> MusicService: GetNextComposition
+RestPactConsumer -> MusicService: GetNextSong
 MusicService --> DBPactProducer : GetAllowed
 MusicService <-- DBPactProducer
 RestPactConsumer <-- MusicService  : response
 
-MusicService <- MQPactConsumer: produces changes \nin music compositions \naccessibility via kafka
+MusicService <- MQPactConsumer: produces changes \nin music Songs \naccessibility via kafka
 MusicService -> DBPactConsumer : Save changes
 @enduml
