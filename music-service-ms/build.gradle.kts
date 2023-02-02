@@ -1,5 +1,6 @@
 plugins {
     java
+    jacoco
     id("org.springframework.boot") version "3.0.2"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.asciidoctor.convert") version "2.4.0"
@@ -22,27 +23,33 @@ repositories {
 val snippetsDir by extra { file("build/generated-snippets") }
 extra["springCloudVersion"] = "2022.0.1"
 extra["testcontainersVersion"] = "1.17.6"
+extra["mapstructVersion"] = "1.5.2.Final"
+extra["mysqlR2dbcVersion"] = "0.8.2.RELEASE"
+extra["mariadbR2dbcVersion"] = "1.1.3"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.kafka:spring-kafka")
+    implementation("io.projectreactor.kafka:reactor-kafka")
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-    // TODO remove version
-    implementation("org.mapstruct:mapstruct:1.5.2.Final")
+    implementation("org.mapstruct:mapstruct:${property("mapstructVersion")}")
 
     compileOnly("org.projectlombok:lombok")
 
-    runtimeOnly("com.mysql:mysql-connector-j")
-    runtimeOnly("dev.miku:r2dbc-mysql:0.8.1.RELEASE")
+//    runtimeOnly("com.mysql:mysql-connector-j")
+//    runtimeOnly("dev.miku:r2dbc-mysql:${property("mysqlR2dbcVersion")}")
+//    runtimeOnly("org.mariadb:r2dbc-mariadb:${property("mariadbR2dbcVersion")}")
+
+    runtimeOnly("io.r2dbc:r2dbc-h2")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
-    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.2.Final")
+    annotationProcessor("org.mapstruct:mapstruct-processor:${property("mapstructVersion")}")
 
-    testAnnotationProcessor("org.mapstruct:mapstruct-processor:1.5.2.Final")
+    testAnnotationProcessor("org.mapstruct:mapstruct-processor:${property("mapstructVersion")}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
@@ -50,7 +57,7 @@ dependencies {
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:kafka")
-    testRuntimeOnly("io.r2dbc:r2dbc-h2")
+    //testRuntimeOnly("io.r2dbc:r2dbc-h2")
 }
 
 dependencyManagement {
@@ -66,6 +73,28 @@ tasks.withType<Test> {
 
 tasks.test {
     outputs.dir(snippetsDir)
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+}
+
+tasks.withType<JacocoReport> {
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.map {
+            fileTree(it).apply {
+                exclude(
+                    "com/wgdetective/pactexample/*/config/*",
+                    "com/wgdetective/pactexample/**/mapper/*",
+                    "com/wgdetective/pactexample/*/dto/*",
+                    "com/wgdetective/pactexample/*/model/*",
+                    "com/wgdetective/pactexample/*/entity/*",
+                    "com/wgdetective/pactexample/*/exception/*"
+                )
+            }
+        }))
+    }
 }
 
 tasks.asciidoctor {

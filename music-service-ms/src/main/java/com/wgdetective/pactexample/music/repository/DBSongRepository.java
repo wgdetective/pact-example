@@ -1,12 +1,13 @@
 package com.wgdetective.pactexample.music.repository;
 
-import java.util.UUID;
-
 import com.wgdetective.pactexample.music.entity.DBSongEntity;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 
 @Repository
-public interface DBSongRepository extends ReactiveCrudRepository<DBSongEntity, UUID> {
+public interface DBSongRepository extends ReactiveCrudRepository<DBSongEntity, Long> {
 
+    Flux<DBSongEntity> findByAuthorAndName(String author, String name);
 }

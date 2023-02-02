@@ -1,4 +1,4 @@
-package com.wgdetective.musicgrant;
+package com.wgdetective.pactexample.musicgrant;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MusicGrantServiceApplication {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(MusicGrantServiceApplication.class, args);
     }
 

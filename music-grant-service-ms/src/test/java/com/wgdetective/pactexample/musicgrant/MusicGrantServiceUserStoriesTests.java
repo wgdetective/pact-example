@@ -1,55 +1,43 @@
-package com.wgdetective.pactexample.music;
+package com.wgdetective.pactexample.musicgrant;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-import com.wgdetective.pactexample.music.entity.DBSongEntity;
-import com.wgdetective.pactexample.music.repository.DBSongRepository;
+import com.wgdetective.pactexample.musicgrant.producer.SongProducer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 @ActiveProfiles("local")
-public class MusicServiceUserStoriesTests {
+public class MusicGrantServiceUserStoriesTests {
 
     @Autowired
     private WebTestClient client;
 
-    @Autowired
-    private DBSongRepository songRepository;
+    @MockBean
+    private SongProducer songProducer;
 
     @Test
-    void testGetNextSong() throws Exception {
+    void testAddSong() throws Exception {
         // given
-        final var expectedJson = readResource("bdd/getNextSong.json");
-        final var song = new DBSongEntity();
-        song.setAuthor("Михаил Елизаров");
-        song.setName("Господин Главный Ветер");
-        songRepository.save(song).block();
+        final var rqJson = readResource("bdd/addSongRq.json");
+        final var expectedJson = readResource("bdd/addSongRs.json");
         // when
-        client.get().uri("/v1/recommendation/song")
+        client.put().uri("/v1/song")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(rqJson)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody().json(expectedJson);
-
-        // clean up
-        songRepository.delete(song).block();
-    }
-
-    @Test
-    void testGetNextSongSongNotFoundException() {
-        // given
-        // when
-        client.get().uri("/v1/recommendation/song")
-                .exchange()
-                .expectStatus().isNotFound();
     }
 
     private String readResource(final String resourceName) throws IOException {

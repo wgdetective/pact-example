@@ -8,5 +8,9 @@ public interface SongRepository {
 
     Flux<Song> findAll();
 
+    Flux<Song> findByAuthorAndName(final String author, final String name);
+
+    Mono<Song> save(final Song song);
+
     Mono<Long> count();
 }

@@ -1,8 +1,5 @@
 package com.wgdetective.pactexample.music.entity;
 
-import java.util.UUID;
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,8 +15,11 @@ public class DBSongEntity {
 
     @Id
     private Long id;
+
     @Version
     private Long version;
+
     private String author;
+
     private String name;
 }

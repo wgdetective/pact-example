@@ -1,6 +1,6 @@
 package com.wgdetective.pactexample.music.controller.mapper;
 
-import com.wgdetective.pactexample.music.dto.SongDto;
+import com.wgdetective.pactexample.music.dto.rest.SongDto;
 import com.wgdetective.pactexample.music.model.Song;
 import org.mapstruct.Mapper;
 

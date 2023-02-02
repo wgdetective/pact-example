@@ -1,0 +1,6 @@
+### Docker
+GET localhost:8085/music-service-ms/v1/recommendation/song
+
+
+### Local
+GET localhost:8081/music-service-ms/v1/recommendation/song

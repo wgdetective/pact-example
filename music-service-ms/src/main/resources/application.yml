@@ -1,16 +1,17 @@
-server:
-  servlet:
-    context-path: music-service-ms
-
-logging:
-  level:
-    org:
-      springframework:
-        data:
-          r2dbc: DEBUG
+musicgrant:
+  kafka:
+    song-topic: song-topic
 
 spring:
-  r2dbc:
-    url: r2dbc:pool:mysql://localhost:3307/music-db?useSSL=false
-    username: root
-    password: 123456
+  profiles:
+    default: kafka, inMemoryDb
+    group:
+      local:
+        - inMemoryDb
+      docker:
+        - mysqlDb
+  webflux:
+    base-path: /music-service-ms
+  sql:
+    init:
+      mode: always
