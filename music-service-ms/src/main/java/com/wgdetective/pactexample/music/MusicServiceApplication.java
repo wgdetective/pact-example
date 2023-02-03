@@ -8,7 +8,7 @@ import reactor.core.publisher.Hooks;
 public class MusicServiceApplication {
 
     public static void main(final String[] args) {
-        Hooks.onOperatorDebug();
+        //Hooks.onOperatorDebug();
         SpringApplication.run(MusicServiceApplication.class, args);
     }
 

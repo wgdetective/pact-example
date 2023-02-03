@@ -1,0 +1,11 @@
+spring:
+  r2dbc:
+    url: r2dbc:pool:postgresql://localhost:5432/postgres?useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: 123456
+  jpa:
+    properties:
+      hibernate:
+        dialect: org:springframework:data:r2dbc:dialect:PostgresDialect
+        show_sql: true
+        ddl-auto: update

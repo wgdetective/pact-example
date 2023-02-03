@@ -25,7 +25,7 @@ extra["springCloudVersion"] = "2022.0.1"
 extra["testcontainersVersion"] = "1.17.6"
 extra["mapstructVersion"] = "1.5.2.Final"
 extra["mysqlR2dbcVersion"] = "0.8.2.RELEASE"
-extra["mariadbR2dbcVersion"] = "1.1.3"
+extra["postgresqlR2dbcVersion"] = "1.0.0.RELEASE"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -41,7 +41,7 @@ dependencies {
 //    runtimeOnly("dev.miku:r2dbc-mysql:${property("mysqlR2dbcVersion")}")
 //    runtimeOnly("org.mariadb:r2dbc-mariadb:${property("mariadbR2dbcVersion")}")
 
-    runtimeOnly("io.r2dbc:r2dbc-h2")
+    runtimeOnly("org.postgresql:r2dbc-postgresql:${property("postgresqlR2dbcVersion")}")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
@@ -57,7 +57,7 @@ dependencies {
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:kafka")
-    //testRuntimeOnly("io.r2dbc:r2dbc-h2")
+    testRuntimeOnly("io.r2dbc:r2dbc-h2")
 }
 
 dependencyManagement {

@@ -10,4 +10,5 @@ User <-- MusicService  : response
 
 MusicService <- GrantMusicService: produces changes \nin music Songs \naccessibility via kafka
 MusicService -> DB : Save changes
+MusicService <-- DB
 @enduml

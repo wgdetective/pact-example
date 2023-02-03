@@ -7,6 +7,7 @@
 - todos
 - finals
 - mysql after merging of https://github.com/mirromutth/r2dbc-mysql/pull/249
+- move to postgres
 
 - docker
 - spring rest docs

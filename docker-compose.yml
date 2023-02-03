@@ -1,17 +1,31 @@
 version: "3.8"
 
 services:
-  mysqldb:
-    image: mysql:latest
-    restart: unless-stopped
+  postgresql:
+    image: postgres:latest
+    restart: always
     env_file: ./.env
     environment:
-      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
-      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+      POSTGRES_USER: $POSTGRESDB_USER
+      POSTGRES_PASSWORD: $POSTGRESDB_PASSWORD
     ports:
-      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
-    volumes:
-      - db:/var/lib/mysql
+      - "$POSTGRESDB_PORT:5432"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "$ADMINER_PORT:8080"
+#  mysqldb:
+#    image: mysql:latest
+#    restart: unless-stopped
+#    env_file: ./.env
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+#      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+#    ports:
+#      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+#    volumes:
+#      - db:/var/lib/mysql
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
@@ -35,7 +49,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
   music-service-ms:
     depends_on:
-      - mysqldb
+      - postgresql
       - kafka
     build: ./music-service-ms
     restart: on-failure
@@ -44,9 +58,9 @@ services:
       - $MS_LOCAL_PORT:$SPRING_DOCKER_PORT
     environment:
       SPRING_APPLICATION_JSON: '{
-        "spring.datasource.url"  : "r2dbc:mysql://mysqldb:$MYSQLDB_DOCKER_PORT/$MYSQLDB_DATABASE?useSSL=false&useUnicode=yes&characterEncoding=UTF-8",
-        "spring.datasource.username" : "$MYSQLDB_USER",
-        "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
+        "spring.r2dbc.url"  : "r2dbc:pool:postgresql://postgresql:$POSTGRESDB_PORT/$POSTGRESDB_NAME?useSSL=false&useUnicode=yes&characterEncoding=UTF-8",
+        "spring.r2dbc.username" : "$POSTGRESDB_USER",
+        "spring.r2dbc.password" : "$POSTGRESDB_PASSWORD",
         "spring.kafka.bootstrap-servers" : "kafka:$KAFKA_PORT"
       }'
     volumes:

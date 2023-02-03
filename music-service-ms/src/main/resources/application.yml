@@ -4,12 +4,13 @@ musicgrant:
 
 spring:
   profiles:
-    default: kafka, inMemoryDb
+    default: kafka, postgresql
     group:
       local:
         - inMemoryDb
       docker:
-        - mysqlDb
+        - kafka
+        - postgresql
   webflux:
     base-path: /music-service-ms
   sql:
