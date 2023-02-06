@@ -1,0 +1,60 @@
+{
+  "consumer": {
+    "name": "music-service-ms"
+  },
+  "messages": [
+    {
+      "contents": {
+        "author": "string",
+        "name": "string"
+      },
+      "description": "valid song from kafka music-grant-service-ms",
+      "generators": {
+        "body": {
+          "$.author": {
+            "size": 20,
+            "type": "RandomString"
+          },
+          "$.name": {
+            "size": 20,
+            "type": "RandomString"
+          }
+        }
+      },
+      "matchingRules": {
+        "body": {
+          "$.author": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ]
+          },
+          "$.name": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ]
+          }
+        }
+      },
+      "metaData": {
+        "contentType": "application/json"
+      }
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.4.5"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "music-grant-service-ms"
+  }
+}
