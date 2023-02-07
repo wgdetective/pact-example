@@ -4,9 +4,9 @@ import com.wgdetective.pactexample.music.model.Song;
 
 public class TestData {
 
-    public static final String author = "Михаил Елизаров";
+    public static final String author = "Rick Astley";
 
-    public static final String name = "Господин Главный Ветер";
+    public static final String name = "Never Gonna Give You Up";
 
     private TestData() {
     }

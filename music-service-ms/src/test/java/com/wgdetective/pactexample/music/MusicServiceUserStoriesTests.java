@@ -30,8 +30,8 @@ public class MusicServiceUserStoriesTests {
         // given
         final var expectedJson = readResource("bdd/getNextSong.json");
         final var song = new DBSongEntity();
-        song.setAuthor("Михаил Елизаров");
-        song.setName("Господин Главный Ветер");
+        song.setAuthor("Rick Astley");
+        song.setName("Never Gonna Give You Up");
         songRepository.save(song).block();
         // when
         client.get().uri("/v1/recommendation/song")

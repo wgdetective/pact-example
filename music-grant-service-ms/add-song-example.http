@@ -3,8 +3,8 @@ PUT localhost:8086/music-grant-service-ms/v1/song
 Content-Type: application/json
 
 {
-  "author": "Михаил Елизаров",
-  "name": "Господин Главный Ветер"
+  "author": "Rick Astley",
+  "name": "Never Gonna Give You Up"
 }
 
 ### Local
@@ -12,6 +12,6 @@ PUT localhost:8080/music-grant-service-ms/v1/song
 Content-Type: application/json
 
 {
-  "author": "Михаил Елизаров",
-  "name": "Господин Главный Ветер"
+  "author": "Rick Astley",
+  "name": "Never Gonna Give You Up"
 }

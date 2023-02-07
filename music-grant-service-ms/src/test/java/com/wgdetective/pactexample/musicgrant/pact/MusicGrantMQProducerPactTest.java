@@ -37,6 +37,6 @@ public class MusicGrantMQProducerPactTest {
 
     @PactVerifyProvider("valid song from kafka music-grant-service-ms")
     public String verifySongMessage() throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(new AddSongEvent("Михаил Елизаров", "Господин Главный Ветер"));
+        return new ObjectMapper().writeValueAsString(new AddSongEvent("Rick Astley", "Never Gonna Give You Up"));
     }
 }
