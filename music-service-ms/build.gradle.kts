@@ -136,7 +136,6 @@ pact {
     publish {
         pactDirectory = "build/pacts/"
         pactBrokerUrl = "http://localhost:9292/"
-        tags = listOf(getGitBranch(), "test", "prod")
-        consumerVersion = getGitHash()
+        consumerVersion = "0.0.1"
     }
 }
