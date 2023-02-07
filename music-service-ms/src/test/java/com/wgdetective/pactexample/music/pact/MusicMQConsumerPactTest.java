@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "music-grant-service-ms", providerType = ProviderType.ASYNCH, pactVersion = PactSpecVersion.V3)
-public class MusicConsumerPactTest {
+public class MusicMQConsumerPactTest {
 
     @Pact(consumer = "music-service-ms", provider = "music-grant-service-ms")
     public MessagePact validMessageFromKafkaProvider(final MessagePactBuilder builder) {
