@@ -1,14 +1,17 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-
 autonumber
 
+actor User
 User -> "music-service-ms": GetNextSong
+database DB
 "music-service-ms" --> DB : GetAllowed
 "music-service-ms" <-- DB
 User <-- "music-service-ms"  : response
 
-"music-service-ms" <- "music-grant-service-ms": produces changes \nin music Songs \naccessibility via kafka
+queue MessageQueue
+MessageQueue <- "music-grant-service-ms": produces changes \nin music Songs \naccessibility via MQ
+"music-service-ms" <- MessageQueue
 "music-service-ms" -> DB : Save changes
 "music-service-ms" <-- DB
 @enduml
