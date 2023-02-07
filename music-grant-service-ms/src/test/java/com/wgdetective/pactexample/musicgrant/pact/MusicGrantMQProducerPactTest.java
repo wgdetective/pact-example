@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wgdetective.pactexample.musicgrant.dto.event.AddSongEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @Provider("music-grant-service-ms")
@@ -22,6 +23,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 //@PactFolder("./pacts")
 public class MusicGrantMQProducerPactTest {
 
+    @EnabledIfSystemProperty(named = "spring.profiles.active", matches = "test-pact")
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void testTemplate(final Pact pact, final Interaction interaction, final PactVerificationContext context) {
