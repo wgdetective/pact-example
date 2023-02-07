@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "3.0.2"
     id("io.spring.dependency-management") version "1.1.0"
     id("org.asciidoctor.convert") version "2.4.0"
+    id("au.com.dius.pact") version "4.4.5"
 }
 
 group = "com.wgdetective"
@@ -50,6 +51,12 @@ dependencies {
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:kafka")
+
+    testCompileOnly("org.projectlombok:lombok")
+    testAnnotationProcessor("org.projectlombok:lombok")
+
+    testImplementation("au.com.dius.pact.provider:junit5spring:4.4.5")
+
 }
 
 dependencyManagement {
@@ -92,4 +99,36 @@ tasks.withType<JacocoReport> {
 tasks.asciidoctor {
     inputs.dir(snippetsDir)
     dependsOn(tasks.test)
+}
+
+tasks.register("copyPacts", Copy::class) {
+    from("build/pacts/")
+    into("src/test/resources/pacts/")
+}
+
+val getGitHash = { ->
+    val stdout = org.apache.commons.io.output.ByteArrayOutputStream()
+    exec {
+        commandLine = "git rev-parse --short HEAD".split(" ")
+        standardOutput = stdout
+    }
+    String(stdout.toByteArray()).trim()
+}
+
+val getGitBranch = { ->
+    val stdout = org.apache.commons.io.output.ByteArrayOutputStream()
+    exec {
+        commandLine = "git rev-parse --abbrev-ref HEAD".split(" ")
+        standardOutput = stdout
+    }
+    String(stdout.toByteArray()).trim()
+}
+
+pact {
+    publish {
+        pactDirectory = "build/pacts/"
+        pactBrokerUrl = "http://localhost:9292/"
+        tags = listOf(getGitBranch(), "test", "prod")
+        consumerVersion = getGitHash()
+    }
 }

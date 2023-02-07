@@ -1,14 +1,14 @@
 = WorkProgress
-1) gradle config
-2) musicService
-3) grantMusicService
+1) [.line-through]#gradle config#
+2) [.line-through]#music-service-ms#
+3) [.line-through]#music-grant-service-ms#
 
 - test kafka
 - todos
-- finals
 - mysql after merging of https://github.com/mirromutth/r2dbc-mysql/pull/249
-- move to postgres
+- [.line-through]#move to postgres#
+- readme
 
-- docker
+- [.line-through]#docker#
 - spring rest docs
 - test containers

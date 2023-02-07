@@ -3,12 +3,12 @@
 
 autonumber
 
-User -> MusicService: GetNextSong
-MusicService --> DB : GetAllowed
-MusicService <-- DB
-User <-- MusicService  : response
+User -> "music-service-ms": GetNextSong
+"music-service-ms" --> DB : GetAllowed
+"music-service-ms" <-- DB
+User <-- "music-service-ms"  : response
 
-MusicService <- GrantMusicService: produces changes \nin music Songs \naccessibility via kafka
-MusicService -> DB : Save changes
-MusicService <-- DB
+"music-service-ms" <- "music-grant-service-ms": produces changes \nin music Songs \naccessibility via kafka
+"music-service-ms" -> DB : Save changes
+"music-service-ms" <-- DB
 @enduml
