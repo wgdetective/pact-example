@@ -136,6 +136,7 @@ pact {
     publish {
         pactDirectory = "build/pacts/"
         pactBrokerUrl = "http://localhost:9292/"
+        tags = listOf("main")
         consumerVersion = "0.0.1"
     }
 }
