@@ -1,7 +1,8 @@
 = WorkProgress
-1) [.line-through]#gradle config#
-2) [.line-through]#music-service-ms#
-3) [.line-through]#music-grant-service-ms#
+
+- [.line-through]#gradle config#
+- [.line-through]#music-service-ms#
+- [.line-through]#music-grant-service-ms#
 
 - test kafka
 - [.line-through]#todos#

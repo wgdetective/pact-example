@@ -26,6 +26,9 @@ extra["springCloudVersion"] = "2022.0.1"
 extra["testcontainersVersion"] = "1.17.6"
 extra["mapstructVersion"] = "1.5.2.Final"
 extra["mysqlr2dbcVersion"] = "0.8.1.RELEASE"
+extra["pactProducerJUnit5SpringVersion"] = "4.4.5"
+extra["pactConsumerJava8Version"] = "4.1.41"
+extra["pactConsumerJUnit5Version"] = "4.4.5"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -55,7 +58,10 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok")
     testAnnotationProcessor("org.projectlombok:lombok")
 
-    testImplementation("au.com.dius.pact.provider:junit5spring:4.4.5")
+    testImplementation("au.com.dius.pact.provider:junit5spring:${property("pactConsumerJUnit5Version")}")
+
+    testImplementation("au.com.dius.pact.consumer:java8:${property("pactConsumerJava8Version")}")
+    testImplementation("au.com.dius.pact.consumer:junit5:${property("pactConsumerJUnit5Version")}")
 
 }
 

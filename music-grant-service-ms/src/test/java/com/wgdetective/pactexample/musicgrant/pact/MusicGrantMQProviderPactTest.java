@@ -21,7 +21,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @Consumer("music-service-ms")
 @PactBroker(url = "http://localhost:9292")
 //@PactFolder("./pacts")
-public class MusicGrantMQProducerPactTest {
+class MusicGrantMQProviderPactTest {
 
     @Disabled
     @TestTemplate
