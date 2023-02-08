@@ -10,11 +10,12 @@
 
 ## Contract testing
 1) Remove @Disabled from [MusicGrantMQProducerPactTest.java](music-grant-service-ms%2Fsrc%2Ftest%2Fjava%2Fcom%2Fwgdetective%2Fpactexample%2Fmusicgrant%2Fpact%2FMusicGrantMQProducerPactTest.java)
-2) Run clean and build for [music-service-ms](music-service-ms)
-3) Run pactPublish for [music-service-ms](music-service-ms)
-4) Check http://localhost:9292/
-5) Run clean and build for [music-grant-service-ms](music-grant-service-ms)
-6) Pact should be verified in scope of [MusicGrantMQProducerPactTest.java](music-grant-service-ms%2Fsrc%2Ftest%2Fjava%2Fcom%2Fwgdetective%2Fpactexample%2Fmusicgrant%2Fpact%2FMusicGrantMQProducerPactTest.java)
+2) Uncomment pact part in **build.gradle.kts** in both microservices
+3) Run clean and build for [music-service-ms](music-service-ms)
+4) Run pactPublish for [music-service-ms](music-service-ms)
+5) Check http://localhost:9292/
+6) Run clean and build for [music-grant-service-ms](music-grant-service-ms)
+7) Pact should be verified in scope of [MusicGrantMQProducerPactTest.java](music-grant-service-ms%2Fsrc%2Ftest%2Fjava%2Fcom%2Fwgdetective%2Fpactexample%2Fmusicgrant%2Fpact%2FMusicGrantMQProducerPactTest.java)
 
 ## Knowing issues
 1) ProducerPactTest stop working - reason is that there are some local changes that has broken version that depends on from gitHash(), just remove pact from pact-broker and make everything from the "Contract testing" instruction above

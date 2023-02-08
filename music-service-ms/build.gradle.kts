@@ -114,29 +114,29 @@ tasks.register("copyPacts", Copy::class) {
     into("src/test/resources/pacts/")
 }
 
-val getGitHash = { ->
+fun getGitHash() : String{
     val stdout = org.apache.commons.io.output.ByteArrayOutputStream()
     exec {
         commandLine = "git rev-parse --short HEAD".split(" ")
         standardOutput = stdout
     }
-    String(stdout.toByteArray()).trim()
+    return String(stdout.toByteArray()).trim()
 }
 
-val getGitBranch = { ->
+fun getGitBranch() : String {
     val stdout = org.apache.commons.io.output.ByteArrayOutputStream()
     exec {
         commandLine = "git rev-parse --abbrev-ref HEAD".split(" ")
         standardOutput = stdout
     }
-    String(stdout.toByteArray()).trim()
+    return String(stdout.toByteArray()).trim()
 }
 
-pact {
-    publish {
-        pactDirectory = "build/pacts/"
-        pactBrokerUrl = "http://localhost:9292/"
-        tags = listOf(getGitBranch(), "test", "prod")
-        consumerVersion = getGitHash()
-    }
-}
+//pact {
+//    publish {
+//        pactDirectory = "build/pacts/"
+//        pactBrokerUrl = "http://localhost:9292/"
+//        tags = listOf(getGitBranch(), "test", "prod")
+//        consumerVersion = getGitHash()
+//    }
+//}
