@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(PactConsumerTestExt.class)
 @PactTestFor(providerName = "music-grant-service-ms", providerType = ProviderType.ASYNCH, pactVersion = PactSpecVersion.V3)
-public class MusicMQConsumerPactTest {
+class MusicMQConsumerPactTest {
 
     @Pact(consumer = "music-service-ms", provider = "music-grant-service-ms")
     public MessagePact validMessageFromKafkaProvider(final MessagePactBuilder builder) {
@@ -37,7 +37,7 @@ public class MusicMQConsumerPactTest {
     @SneakyThrows
     @Test
     @PactTestFor(pactMethod = "validMessageFromKafkaProvider")
-    public void testValidDateFromProvider(final List<Message> messages) {
+    void testValidDateFromProvider(final List<Message> messages) {
         assertThat(messages).isNotEmpty();
         assertThat(new ObjectMapper().readValue(new String(messages.get(0).contentsAsBytes()), AddSongEvent.class))
                 .hasFieldOrProperty("author")

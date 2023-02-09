@@ -26,13 +26,16 @@ extra["springCloudVersion"] = "2022.0.1"
 extra["testcontainersVersion"] = "1.17.6"
 extra["mapstructVersion"] = "1.5.2.Final"
 extra["mysqlr2dbcVersion"] = "0.8.1.RELEASE"
+extra["pactProducerJUnit5SpringVersion"] = "4.4.5"
+extra["pactConsumerJava8Version"] = "4.1.41"
+extra["pactConsumerJUnit5Version"] = "4.4.5"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.kafka:spring-kafka")
     implementation("io.projectreactor.kafka:reactor-kafka")
-    // TODO remove version
+
     implementation("org.mapstruct:mapstruct:${property("mapstructVersion")}")
 
     compileOnly("org.projectlombok:lombok")
@@ -55,7 +58,10 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok")
     testAnnotationProcessor("org.projectlombok:lombok")
 
-    testImplementation("au.com.dius.pact.provider:junit5spring:4.4.5")
+    testImplementation("au.com.dius.pact.provider:junit5spring:${property("pactConsumerJUnit5Version")}")
+
+    testImplementation("au.com.dius.pact.consumer:java8:${property("pactConsumerJava8Version")}")
+    testImplementation("au.com.dius.pact.consumer:junit5:${property("pactConsumerJUnit5Version")}")
 
 }
 
@@ -106,29 +112,29 @@ tasks.register("copyPacts", Copy::class) {
     into("src/test/resources/pacts/")
 }
 
-val getGitHash = { ->
+fun getGitHash() : String{
     val stdout = org.apache.commons.io.output.ByteArrayOutputStream()
     exec {
         commandLine = "git rev-parse --short HEAD".split(" ")
         standardOutput = stdout
     }
-    String(stdout.toByteArray()).trim()
+    return String(stdout.toByteArray()).trim()
 }
 
-val getGitBranch = { ->
+fun getGitBranch() : String {
     val stdout = org.apache.commons.io.output.ByteArrayOutputStream()
     exec {
         commandLine = "git rev-parse --abbrev-ref HEAD".split(" ")
         standardOutput = stdout
     }
-    String(stdout.toByteArray()).trim()
+    return String(stdout.toByteArray()).trim()
 }
 
-pact {
-    publish {
-        pactDirectory = "build/pacts/"
-        pactBrokerUrl = "http://localhost:9292/"
-        tags = listOf(getGitBranch(), "test", "prod")
-        consumerVersion = getGitHash()
-    }
-}
+//pact {
+//    publish {
+//        pactDirectory = "build/pacts/"
+//        pactBrokerUrl = "http://localhost:9292/"
+//        tags = listOf(getGitBranch(), "test", "prod")
+//        consumerVersion = getGitHash()
+//    }
+//}

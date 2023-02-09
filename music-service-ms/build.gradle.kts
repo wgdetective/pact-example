@@ -27,6 +27,8 @@ extra["testcontainersVersion"] = "1.17.6"
 extra["mapstructVersion"] = "1.5.2.Final"
 extra["mysqlR2dbcVersion"] = "0.8.2.RELEASE"
 extra["postgresqlR2dbcVersion"] = "1.0.0.RELEASE"
+extra["pactConsumerJava8Version"] = "4.1.41"
+extra["pactConsumerJUnit5Version"] = "4.4.5"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -63,8 +65,8 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok")
     testAnnotationProcessor("org.projectlombok:lombok")
 
-    testImplementation("au.com.dius.pact.consumer:java8:4.1.41")
-    testImplementation("au.com.dius.pact.consumer:junit5:4.4.5")
+    testImplementation("au.com.dius.pact.consumer:java8:${property("pactConsumerJava8Version")}")
+    testImplementation("au.com.dius.pact.consumer:junit5:${property("pactConsumerJUnit5Version")}")
 }
 
 dependencyManagement {
@@ -114,22 +116,22 @@ tasks.register("copyPacts", Copy::class) {
     into("src/test/resources/pacts/")
 }
 
-val getGitHash = { ->
+fun getGitHash() : String{
     val stdout = org.apache.commons.io.output.ByteArrayOutputStream()
     exec {
         commandLine = "git rev-parse --short HEAD".split(" ")
         standardOutput = stdout
     }
-    String(stdout.toByteArray()).trim()
+    return String(stdout.toByteArray()).trim()
 }
 
-val getGitBranch = { ->
+fun getGitBranch() : String {
     val stdout = org.apache.commons.io.output.ByteArrayOutputStream()
     exec {
         commandLine = "git rev-parse --abbrev-ref HEAD".split(" ")
         standardOutput = stdout
     }
-    String(stdout.toByteArray()).trim()
+    return String(stdout.toByteArray()).trim()
 }
 
 pact {
@@ -137,6 +139,7 @@ pact {
         pactDirectory = "build/pacts/"
         pactBrokerUrl = "http://localhost:9292/"
         tags = listOf(getGitBranch(), "test", "prod")
-        consumerVersion = getGitHash()
+        consumerVersion = "0.0.1-SNAPSHOT"
+        consumerBranch = "main"
     }
 }
