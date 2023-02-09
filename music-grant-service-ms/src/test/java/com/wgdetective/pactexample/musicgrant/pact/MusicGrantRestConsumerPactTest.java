@@ -20,11 +20,13 @@ import com.wgdetective.pactexample.musicgrant.util.TestData;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(PactConsumerTestExt.class)
+@ActiveProfiles("pact-test")
 class MusicGrantRestConsumerPactTest {
 
     @Pact(consumer = "User", provider = "music-grant-service-ms")

@@ -16,7 +16,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("pact-test")
 @Provider("music-grant-service-ms")
 @Consumer("music-service-ms")
 @PactBroker(url = "http://localhost:9292")
