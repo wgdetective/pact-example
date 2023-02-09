@@ -5,15 +5,12 @@ import java.util.Map;
 
 import au.com.dius.pact.consumer.MockServer;
 import au.com.dius.pact.consumer.dsl.LambdaDsl;
-import au.com.dius.pact.consumer.dsl.PactBuilder;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.PactSpecVersion;
 import au.com.dius.pact.core.model.RequestResponsePact;
-import au.com.dius.pact.core.model.V4Pact;
 import au.com.dius.pact.core.model.annotations.Pact;
-import com.wgdetective.pactexample.musicgrant.dto.rest.AddSongDto;
 import com.wgdetective.pactexample.musicgrant.dto.rest.SongDto;
 import com.wgdetective.pactexample.musicgrant.pact.service.AddSongTestService;
 import com.wgdetective.pactexample.musicgrant.util.TestData;
@@ -31,7 +28,7 @@ class MusicGrantRestConsumerPactTest {
 
     @Pact(consumer = "User", provider = "music-grant-service-ms")
     RequestResponsePact addSong(final PactDslWithProvider builder) {
-        return builder.uponReceiving("get created song")
+        return builder.uponReceiving("add song")
                 .method("PUT")
                 .path("/v1/song")
                 .body("")
@@ -62,7 +59,7 @@ class MusicGrantRestConsumerPactTest {
 
     private Map<String, String> headers() {
         final Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json; charset=utf-8");
+        headers.put("Content-Type", "application/json;charset=utf-8");
         return headers;
     }
 }
