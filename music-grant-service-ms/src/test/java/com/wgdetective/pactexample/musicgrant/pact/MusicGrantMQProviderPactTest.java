@@ -1,5 +1,7 @@
 package com.wgdetective.pactexample.musicgrant.pact;
 
+import java.util.List;
+
 import au.com.dius.pact.core.model.Interaction;
 import au.com.dius.pact.core.model.Pact;
 import au.com.dius.pact.provider.PactVerifyProvider;
@@ -12,6 +14,7 @@ import au.com.dius.pact.provider.junitsupport.loader.PactBroker;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wgdetective.pactexample.musicgrant.dto.event.AddSongEvent;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
@@ -29,6 +32,7 @@ class MusicGrantMQProviderPactTest {
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void testTemplate(final Pact pact, final Interaction interaction, final PactVerificationContext context) {
+        context.getProviderInfo().setPackagesToScan(List.of("com.wgdetective.pactexample.musicgrant.pact"));
         context.verifyInteraction();
     }
 
