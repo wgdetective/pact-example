@@ -4,9 +4,12 @@
   },
   "interactions": [
     {
-      "description": "get created song",
+      "description": "add song",
       "request": {
-        "body": "",
+        "body": {
+          "author": "Rick Astley",
+          "name": "Never Gonna Give You Up"
+        },
         "method": "PUT",
         "path": "/v1/song"
       },
@@ -17,7 +20,7 @@
           "name": "Never Gonna Give You Up"
         },
         "headers": {
-          "Content-Type": "application/json; charset=utf-8"
+          "Content-Type": "application/json"
         },
         "matchingRules": {
           "body": {

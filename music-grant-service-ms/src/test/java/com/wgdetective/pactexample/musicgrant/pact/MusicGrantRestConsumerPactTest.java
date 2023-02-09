@@ -31,7 +31,11 @@ class MusicGrantRestConsumerPactTest {
         return builder.uponReceiving("add song")
                 .method("PUT")
                 .path("/v1/song")
-                .body("")
+                .body("""
+                        {
+                            "author": "%s",
+                            "name": "%s"
+                        }""".formatted(TestData.author, TestData.name))
                 .willRespondWith()
                 .status(200)
                 .headers(headers())
@@ -59,7 +63,7 @@ class MusicGrantRestConsumerPactTest {
 
     private Map<String, String> headers() {
         final Map<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json;charset=utf-8");
+        headers.put("Content-Type", "application/json");
         return headers;
     }
 }
