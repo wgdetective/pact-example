@@ -17,7 +17,6 @@
             <artifactId>junit5spring</artifactId>
             <version>${pact.version}</version>
         </dependency>
-
     </dependencies>
 
 </project>
