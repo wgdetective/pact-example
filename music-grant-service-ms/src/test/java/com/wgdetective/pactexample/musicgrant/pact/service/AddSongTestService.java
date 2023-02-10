@@ -3,15 +3,11 @@ package com.wgdetective.pactexample.musicgrant.pact.service;
 import com.wgdetective.pactexample.musicgrant.dto.rest.AddSongDto;
 import com.wgdetective.pactexample.musicgrant.dto.rest.SongDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-@Service
 @RequiredArgsConstructor
-@Profile("pact-test")
 public class AddSongTestService {
 
     public static final String V_1_SONG_PATH = "/v1/song";
