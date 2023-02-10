@@ -5,10 +5,18 @@
   "interactions": [
     {
       "description": "add song",
+      "providerStates": [
+        {
+          "name": "no songs exist"
+        }
+      ],
       "request": {
         "body": {
           "author": "Rick Astley",
           "name": "Never Gonna Give You Up"
+        },
+        "headers": {
+          "Content-Type": "application/json"
         },
         "method": "PUT",
         "path": "/v1/song"
@@ -51,6 +59,28 @@
           }
         },
         "status": 200
+      }
+    },
+    {
+      "description": "add song",
+      "providerStates": [
+        {
+          "name": "song already exist"
+        }
+      ],
+      "request": {
+        "body": {
+          "author": "Rick Astley",
+          "name": "Never Gonna Give You Up"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "PUT",
+        "path": "/v1/song"
+      },
+      "response": {
+        "status": 409
       }
     }
   ],
