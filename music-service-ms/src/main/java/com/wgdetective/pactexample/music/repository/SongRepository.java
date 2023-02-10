@@ -13,4 +13,6 @@ public interface SongRepository {
     Mono<Song> save(final Song song);
 
     Mono<Long> count();
+
+    Mono<Song> findById(long id);
 }
