@@ -8,6 +8,11 @@
 2) Install docker
 3) Run [docker-compose.yml](docker-compose.yml)
 
+## How to test via REST
+- run request to Docker from [add-song-example.http](music-grant-service-ms%2Fadd-song-example.http)
+- wait for 10-30 sec
+- run request to Docker from [get-recommended-song-example.http](music-service-ms%2Fget-recommended-song-example.http)
+
 ## Contract testing
 1) Remove @Disabled from [MusicGrantMQProducerPactTest.java](music-grant-service-ms%2Fsrc%2Ftest%2Fjava%2Fcom%2Fwgdetective%2Fpactexample%2Fmusicgrant%2Fpact%2FMusicGrantMQProducerPactTest.java)
 2) Uncomment pact part in [build.gradle.kts](music-service-ms%2Fbuild.gradle.kts)
