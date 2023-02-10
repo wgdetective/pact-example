@@ -130,11 +130,11 @@ fun getGitBranch() : String {
     return String(stdout.toByteArray()).trim()
 }
 
-pact {
-    publish {
-        pactDirectory = "build/pacts/"
-        pactBrokerUrl = "http://localhost:9292/"
-        tags = listOf(getGitBranch(), "test", "prod")
-        consumerVersion = "0.0.1-SNAPSHOT"
-    }
-}
+//pact {
+//    publish {
+//        pactDirectory = "build/pacts/"
+//        pactBrokerUrl = "http://localhost:9292/"
+//        tags = listOf(getGitBranch(), "test", "prod")
+//        consumerVersion = "0.0.1-SNAPSHOT"
+//    }
+//}
