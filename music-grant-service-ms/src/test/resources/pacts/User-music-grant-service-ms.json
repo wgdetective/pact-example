@@ -5,6 +5,8 @@
   "interactions": [
     {
       "description": "add song",
+      "key": "a886d896",
+      "pending": false,
       "providerStates": [
         {
           "name": "no songs exist"
@@ -12,23 +14,35 @@
       ],
       "request": {
         "body": {
-          "author": "Rick Astley",
-          "name": "Never Gonna Give You Up"
+          "content": {
+            "author": "Rick Astley",
+            "name": "Never Gonna Give You Up"
+          },
+          "contentType": "application/json",
+          "encoded": false
         },
         "headers": {
-          "Content-Type": "application/json"
+          "Content-Type": [
+            "application/json"
+          ]
         },
         "method": "PUT",
         "path": "/v1/song"
       },
       "response": {
         "body": {
-          "author": "Rick Astley",
-          "id": 1,
-          "name": "Never Gonna Give You Up"
+          "content": {
+            "author": "Rick Astley",
+            "id": 1,
+            "name": "Never Gonna Give You Up"
+          },
+          "contentType": "application/json",
+          "encoded": false
         },
         "headers": {
-          "Content-Type": "application/json"
+          "Content-Type": [
+            "application/json"
+          ]
         },
         "matchingRules": {
           "body": {
@@ -59,10 +73,16 @@
           }
         },
         "status": 200
-      }
+      },
+      "type": "Synchronous/HTTP"
     },
     {
+      "comments": {
+        "testname": "com.wgdetective.pactexample.musicgrant.pact.MusicGrantRestConsumerPactTest.addExistingSong(MockServer)"
+      },
       "description": "add song",
+      "key": "38085f68",
+      "pending": false,
       "providerStates": [
         {
           "name": "song already exist"
@@ -70,18 +90,26 @@
       ],
       "request": {
         "body": {
-          "author": "Rick Astley",
-          "name": "Never Gonna Give You Up"
+          "content": {
+            "author": "Rick Astley",
+            "name": "Never Gonna Give You Up"
+          },
+          "contentType": "application/json",
+          "encoded": false
         },
         "headers": {
-          "Content-Type": "application/json"
+          "Content-Type": [
+            "application/json"
+          ]
         },
         "method": "PUT",
         "path": "/v1/song"
       },
       "response": {
         "status": 409
-      }
+      },
+      "transport": "https",
+      "type": "Synchronous/HTTP"
     }
   ],
   "metadata": {
@@ -89,8 +117,11 @@
       "version": "4.4.5"
     },
     "pactSpecification": {
-      "version": "3.0.0"
-    }
+      "version": "4.0"
+    },
+    "plugins": [
+
+    ]
   },
   "provider": {
     "name": "music-grant-service-ms"

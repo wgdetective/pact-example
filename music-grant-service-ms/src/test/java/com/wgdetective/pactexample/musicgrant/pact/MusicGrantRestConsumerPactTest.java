@@ -5,11 +5,13 @@ import java.util.Map;
 
 import au.com.dius.pact.consumer.MockServer;
 import au.com.dius.pact.consumer.dsl.LambdaDsl;
+import au.com.dius.pact.consumer.dsl.PactBuilder;
 import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.PactSpecVersion;
 import au.com.dius.pact.core.model.RequestResponsePact;
+import au.com.dius.pact.core.model.V4Pact;
 import au.com.dius.pact.core.model.annotations.Pact;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,17 +34,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class MusicGrantRestConsumerPactTest {
 
     @Pact(consumer = "User", provider = "music-grant-service-ms")
-    RequestResponsePact addExistingSong(final PactDslWithProvider builder) throws JsonProcessingException {
+    V4Pact addExistingSong(final PactBuilder builder) throws JsonProcessingException {
         AddSongDto addSongDto = new AddSongDto(TestData.author, TestData.name);
+        String body = new ObjectMapper().writeValueAsString(addSongDto);
 
         return builder.given("song already exist")
-                .uponReceiving("add song")
-                .method("PUT")
-                .path("/v1/song")
-                .headers(headers())
-                .body(new ObjectMapper().writeValueAsString(addSongDto))
-                .willRespondWith()
-                .status(409)
+                .expectsToReceiveHttpInteraction("add song",
+                        http -> http
+                                .withRequest(request -> request.method("PUT")
+                                        .path("/v1/song")
+                                        .headers(headers())
+                                        .body(body))
+                                .willRespondWith(response ->
+                                        response.status(409)))
                 .toPact();
     }
 
@@ -70,7 +74,7 @@ class MusicGrantRestConsumerPactTest {
     }
 
     @Test
-    @PactTestFor(pactMethod = "addExistingSong", pactVersion = PactSpecVersion.V3)
+    @PactTestFor(pactMethod = "addExistingSong", pactVersion = PactSpecVersion.V4)
     void addExistingSong(final MockServer mockServer) {
 
         final RestTemplate restTemplate = new RestTemplateBuilder()
