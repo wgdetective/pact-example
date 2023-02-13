@@ -12,7 +12,6 @@
     <artifactId>music-grant-service-ms</artifactId>
 
     <properties>
-        <postgresql.R2dbc.version>1.0.0.RELEASE</postgresql.R2dbc.version>
         <pact.consumer.java8.version>4.1.41</pact.consumer.java8.version>
     </properties>
 

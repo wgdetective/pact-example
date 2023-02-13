@@ -14,6 +14,7 @@
     <properties>
         <postgresql.R2dbc.version>1.0.0.RELEASE</postgresql.R2dbc.version>
         <pact.consumer.java8.version>4.1.41</pact.consumer.java8.version>
+        <pact.consumer.java8.version>4.1.41</pact.consumer.java8.version>
     </properties>
 
     <dependencies>
@@ -47,6 +48,12 @@
             <artifactId>jakarta.annotation-api</artifactId>
             <version>2.1.1</version>
         </dependency>
+        <dependency>
+            <groupId>au.com.dius.pact.provider</groupId>
+            <artifactId>junit5spring</artifactId>
+            <version>${pact.version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>

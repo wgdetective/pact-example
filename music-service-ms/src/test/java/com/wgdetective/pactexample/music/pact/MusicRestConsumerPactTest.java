@@ -1,13 +1,11 @@
 package com.wgdetective.pactexample.music.pact;
 
 import au.com.dius.pact.consumer.MockServer;
-import au.com.dius.pact.consumer.dsl.LambdaDsl;
 import au.com.dius.pact.consumer.dsl.PactBuilder;
-import au.com.dius.pact.consumer.dsl.PactDslWithProvider;
+import au.com.dius.pact.consumer.dsl.PactDslJsonBody;
 import au.com.dius.pact.consumer.junit5.PactConsumerTestExt;
 import au.com.dius.pact.consumer.junit5.PactTestFor;
 import au.com.dius.pact.core.model.PactSpecVersion;
-import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.V4Pact;
 import au.com.dius.pact.core.model.annotations.Pact;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -33,31 +31,28 @@ class MusicRestConsumerPactTest {
     @Pact(consumer = "User", provider = "music-service-ms")
     V4Pact getNonExistingSong(final PactBuilder builder) throws JsonProcessingException {
         return builder.given("song does not exist")
-                .expectsToReceiveHttpInteraction("get song",
-                        http -> http
-                                .withRequest(request -> request.method("GET")
-                                        .path("/v1/songs/1"))
-                                .willRespondWith(response ->
-                                        response.status(404)))
+                .expectsToReceiveHttpInteraction("get song", http -> http
+                        .withRequest(request -> request.method("GET")
+                                .path("/v1/songs/1"))
+                        .willRespondWith(response ->
+                                response.status(404)))
                 .toPact();
     }
 
 
     @Pact(consumer = "User", provider = "music-service-ms")
-    RequestResponsePact getExistingSong(final PactDslWithProvider builder) {
+    V4Pact getExistingSong(final PactBuilder builder) {
         return builder.given("song exists")
-                .uponReceiving("get song")
-                .method("GET")
-                .path("/v1/songs/1")
-                .willRespondWith()
-                .status(200)
-                .headers(headers())
-                .body(LambdaDsl.newJsonBody(lambdaDslJsonBody -> {
-                            lambdaDslJsonBody.numberType("id", 1);
-                            lambdaDslJsonBody.stringType("author", "Rick Astley");
-                            lambdaDslJsonBody.stringType("name", "Never Gonna Give You Up");
-                        }).build()
-                )
+                .expectsToReceiveHttpInteraction("get song", http -> http
+                        .withRequest(request -> request.method("GET")
+                                .path("/v1/songs/1"))
+                        .willRespondWith(response ->
+                                response.status(200)
+                                        .headers(headers())
+                                        .body(new PactDslJsonBody()
+                                                .numberValue("id", 1)
+                                                .stringValue("author", "Rick Astley")
+                                                .stringValue("name", "Never Gonna Give You Up"))))
                 .toPact();
     }
 
@@ -73,7 +68,7 @@ class MusicRestConsumerPactTest {
     }
 
     @Test
-    @PactTestFor(pactMethod = "getExistingSong", pactVersion = PactSpecVersion.V3)
+    @PactTestFor(pactMethod = "getExistingSong", pactVersion = PactSpecVersion.V4)
     void getExistingSong(final MockServer mockServer) {
         final SongDto expected = new SongDto(1L, "Rick Astley", "Never Gonna Give You Up");
 
