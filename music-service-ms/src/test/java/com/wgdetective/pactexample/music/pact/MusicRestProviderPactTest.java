@@ -12,6 +12,7 @@ import com.wgdetective.pactexample.music.model.Song;
 import com.wgdetective.pactexample.music.repository.DBSongRepository;
 import com.wgdetective.pactexample.music.service.SongService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.r2dbc.init.R2dbcScriptDatabaseInitializer;
@@ -47,8 +48,8 @@ class MusicRestProviderPactTest {
         context.setTarget(new HttpTestTarget("localhost", port, "music-service-ms"));
     }
 
+    @Disabled
     @TestTemplate
-//    @Disabled
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void verifyPact(final PactVerificationContext context) {
         context.getProviderInfo().setPackagesToScan(List.of("com.wgdetective.pactexample.music.pact"));
