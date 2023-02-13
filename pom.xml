@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.4</version>
+        <version>3.0.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.wgdetective</groupId>
@@ -23,7 +23,7 @@
         <java.version>17</java.version>
         <spring.cloud.version>2022.0.1</spring.cloud.version>
         <test.containers.version>1.17.6</test.containers.version>
-        <mapstruct.version>1.5.2.Final</mapstruct.version>
+        <mapstruct.version>1.5.3.Final</mapstruct.version>
         <pact.version>4.4.5</pact.version>
         <lombock.version>1.18.26</lombock.version>
     </properties>
@@ -95,14 +95,11 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
             <version>${mapstruct.version}</version>
-            <optional>true</optional>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.projectreactor</groupId>
@@ -113,7 +110,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
             <version>4.0.1</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.kafka</groupId>
@@ -179,18 +175,14 @@
                             <version>${lombock.version}</version>
                         </path>
                         <!--                        <path>-->
-                        <!--                            <dependency>-->
                         <!--                                <groupId>org.springframework.boot</groupId>-->
                         <!--                                <artifactId>spring-boot-configuration-processor</artifactId>-->
-                        <!--                            </dependency>-->
                         <!--                        </path>-->
-                        <!--                        <path>-->
-                        <!--                            <dependency>-->
-                        <!--                                <groupId>org.mapstruct</groupId>-->
-                        <!--                                <artifactId>mapstruct-processor</artifactId>-->
-                        <!--                                <version>${mapstruct.version}</version>-->
-                        <!--                            </dependency>-->
-                        <!--                        </path>-->
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
