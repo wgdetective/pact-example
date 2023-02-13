@@ -11,12 +11,65 @@
 
     <artifactId>music-grant-service-ms</artifactId>
 
+    <properties>
+        <postgresql.R2dbc.version>1.0.0.RELEASE</postgresql.R2dbc.version>
+        <pact.consumer.java8.version>4.1.41</pact.consumer.java8.version>
+    </properties>
+
     <dependencies>
+        <dependency>
+            <groupId>au.com.dius.pact.consumer</groupId>
+            <artifactId>junit5</artifactId>
+            <version>${pact.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>au.com.dius.pact.consumer</groupId>
+            <artifactId>java8</artifactId>
+            <version>${pact.consumer.java8.version}</version>
+        </dependency>
         <dependency>
             <groupId>au.com.dius.pact.provider</groupId>
             <artifactId>junit5spring</artifactId>
             <version>${pact.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>au.com.dius.pact.provider</groupId>
+                <artifactId>maven</artifactId>
+                <version>4.2.2</version>
+                <configuration>
+                    <pactBrokerUrl>http://localhost:9292/</pactBrokerUrl>
+                    <pactDirectory>target/pacts</pactDirectory>
+                    <projectVersion>1.0.0</projectVersion>
+                    <tags>
+                        <tag>main</tag>
+                        <tag>test</tag>
+                        <tag>prod</tag>
+                    </tags>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-file</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <sourceFile>target/pacts/</sourceFile>
+                            <destinationFile>src/test/resources/pacts/</destinationFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
