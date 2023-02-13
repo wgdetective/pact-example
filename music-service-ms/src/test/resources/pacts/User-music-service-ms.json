@@ -1,0 +1,100 @@
+{
+  "consumer": {
+    "name": "User"
+  },
+  "interactions": [
+    {
+      "comments": {
+        "testname": "com.wgdetective.pactexample.music.pact.MusicRestConsumerPactTest.getNonExistingSong(MockServer)"
+      },
+      "description": "get song",
+      "key": "18d4dfb7",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "song does not exist"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/v1/songs/1"
+      },
+      "response": {
+        "status": 404
+      },
+      "transport": "https",
+      "type": "Synchronous/HTTP"
+    },
+    {
+      "description": "get song",
+      "key": "3aa4adfe",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "song exists"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/v1/songs/1"
+      },
+      "response": {
+        "body": {
+          "content": {
+            "author": "Rick Astley",
+            "id": 1,
+            "name": "Never Gonna Give You Up"
+          },
+          "contentType": "application/json",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.author": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "number"
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      },
+      "type": "Synchronous/HTTP"
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.4.5"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    }
+  },
+  "provider": {
+    "name": "music-service-ms"
+  }
+}

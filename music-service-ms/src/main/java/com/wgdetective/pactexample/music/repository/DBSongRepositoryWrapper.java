@@ -35,4 +35,9 @@ public class DBSongRepositoryWrapper implements SongRepository {
     public Mono<Long> count() {
         return dbSongRepository.count();
     }
+
+    @Override
+    public Mono<Song> findById(long id) {
+        return dbSongRepository.findById(id).map(mapper::map);
+    }
 }

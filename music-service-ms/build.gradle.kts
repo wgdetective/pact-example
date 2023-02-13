@@ -65,6 +65,8 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok")
     testAnnotationProcessor("org.projectlombok:lombok")
 
+    testImplementation("au.com.dius.pact.provider:junit5spring:${property("pactConsumerJUnit5Version")}")
+
     testImplementation("au.com.dius.pact.consumer:java8:${property("pactConsumerJava8Version")}")
     testImplementation("au.com.dius.pact.consumer:junit5:${property("pactConsumerJUnit5Version")}")
 }
