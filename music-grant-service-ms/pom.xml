@@ -52,19 +52,22 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>com.coderplus.maven.plugins</groupId>
-                <artifactId>copy-rename-maven-plugin</artifactId>
-                <version>1.0</version>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
                 <executions>
                     <execution>
-                        <id>copy-file</id>
+                        <id>copy-resource-one</id>
                         <phase>install</phase>
                         <goals>
-                            <goal>copy</goal>
+                            <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <sourceFile>target/pacts/</sourceFile>
-                            <destinationFile>src/test/resources/pacts/</destinationFile>
+                            <outputDirectory>src/test/resources/pacts/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>target/pacts</directory>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>
