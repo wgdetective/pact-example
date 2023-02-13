@@ -41,8 +41,8 @@ class MusicGrantRestProviderPactTest {
         context.setTarget(new HttpTestTarget("localhost", port, "music-grant-service-ms"));
     }
 
+    //    @Disabled
     @TestTemplate
-//    @Disabled
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void verifyPact(final PactVerificationContext context) {
         context.getProviderInfo().setPackagesToScan(List.of("com.wgdetective.pactexample.musicgrant.pact"));
