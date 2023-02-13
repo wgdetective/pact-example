@@ -11,6 +11,7 @@ import com.wgdetective.pactexample.musicgrant.exceptions.SongAlreadyExistsExcept
 import com.wgdetective.pactexample.musicgrant.model.Song;
 import com.wgdetective.pactexample.musicgrant.service.SongService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,7 +42,7 @@ class MusicGrantRestProviderPactTest {
         context.setTarget(new HttpTestTarget("localhost", port, "music-grant-service-ms"));
     }
 
-    //    @Disabled
+    @Disabled
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void verifyPact(final PactVerificationContext context) {
