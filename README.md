@@ -16,10 +16,10 @@
 ## Contract testing
 1) Remove @Disabled from [MusicGrantMQProducerPactTest.java](music-grant-service-ms%2Fsrc%2Ftest%2Fjava%2Fcom%2Fwgdetective%2Fpactexample%2Fmusicgrant%2Fpact%2FMusicGrantMQProducerPactTest.java)
 2) Uncomment pact part in [build.gradle.kts](music-service-ms%2Fbuild.gradle.kts)
-3) Run clean and build for [music-service-ms](music-service-ms)
+3) Run clean and build for [music-service-ms](music-service-ms), clean and install if maven is used
 4) Run pactPublish for [music-service-ms](music-service-ms)
 5) Check http://localhost:9292/
-6) Run clean and build for [music-grant-service-ms](music-grant-service-ms)
+6) Run clean and build for [music-grant-service-ms](music-grant-service-ms), clean and install if maven is used
 7) Pact should be verified in scope of [MusicGrantMQProducerPactTest.java](music-grant-service-ms%2Fsrc%2Ftest%2Fjava%2Fcom%2Fwgdetective%2Fpactexample%2Fmusicgrant%2Fpact%2FMusicGrantMQProducerPactTest.java)
 
 ## Knowing issues
