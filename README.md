@@ -1,7 +1,7 @@
 # Pact Example
 
 ## Architecture
-[microservices.puml](docs%2Fmicroservices.puml)
+[sequence.puml](docs%2Fsequence.puml)
 
 ## How to run
 1) Set up Java 17 for project and for Gradle in IDE
