@@ -42,6 +42,11 @@ class MusicRestConsumerPactTest {
 
     @Pact(consumer = "User", provider = "music-service-ms")
     V4Pact getExistingSong(final PactBuilder builder) {
+        PactDslJsonBody responseBody = new PactDslJsonBody()
+                .numberValue("id", 1)
+                .stringValue("author", "Rick Astley")
+                .stringValue("name", "Never Gonna Give You Up");
+
         return builder.given("song exists")
                 .expectsToReceiveHttpInteraction("get song", http -> http
                         .withRequest(request -> request.method("GET")
@@ -49,10 +54,7 @@ class MusicRestConsumerPactTest {
                         .willRespondWith(response ->
                                 response.status(200)
                                         .headers(headers())
-                                        .body(new PactDslJsonBody()
-                                                .numberValue("id", 1)
-                                                .stringValue("author", "Rick Astley")
-                                                .stringValue("name", "Never Gonna Give You Up"))))
+                                        .body(responseBody)))
                 .toPact();
     }
 
