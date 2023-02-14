@@ -1,0 +1,70 @@
+{
+  "consumer": {
+    "name": "music-service-ms-v4"
+  },
+  "interactions": [
+    {
+      "comments": {
+        "testname": "com.wgdetective.pactexample.music.pact.MusicMQConsumerV4PactTest.testValidDateFromProvider(List)"
+      },
+      "contents": {
+        "content": {
+          "author": "string",
+          "name": "string"
+        },
+        "contentType": "application/json",
+        "encoded": false
+      },
+      "description": "valid song from kafka music-grant-service-ms (v4)",
+      "generators": {
+        "body": {
+          "$.author": {
+            "size": 20,
+            "type": "RandomString"
+          },
+          "$.name": {
+            "size": 20,
+            "type": "RandomString"
+          }
+        }
+      },
+      "key": "",
+      "matchingRules": {
+        "body": {
+          "$.author": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ]
+          },
+          "$.name": {
+            "combine": "AND",
+            "matchers": [
+              {
+                "match": "type"
+              }
+            ]
+          }
+        }
+      },
+      "metadata": {
+        "contentType": "application/json"
+      },
+      "pending": false,
+      "type": "Asynchronous/Messages"
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.4.5"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    }
+  },
+  "provider": {
+    "name": "music-grant-service-ms"
+  }
+}
