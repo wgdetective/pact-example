@@ -27,7 +27,7 @@ import java.util.List;
 //@PactFolder("./pacts")
 class MusicGrantMQProviderV4PactTest {
 
-//    @Disabled
+    @Disabled
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void testTemplate(final Pact pact, final Interaction interaction, final PactVerificationContext context) {

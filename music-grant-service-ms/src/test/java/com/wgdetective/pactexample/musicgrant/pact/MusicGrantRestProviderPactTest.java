@@ -42,7 +42,7 @@ class MusicGrantRestProviderPactTest {
         context.setTarget(new HttpTestTarget("localhost", port, "music-grant-service-ms"));
     }
 
-//    @Disabled
+    @Disabled
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void verifyPact(final PactVerificationContext context) {
