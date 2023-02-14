@@ -27,7 +27,7 @@ import org.springframework.test.context.ActiveProfiles;
 //@PactFolder("./pacts")
 class MusicGrantMQProviderPactTest {
 
-    @Disabled
+    @Disabled("Disabled to allow make build when pact hasn't yet been published")
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void testTemplate(final Pact pact, final Interaction interaction, final PactVerificationContext context) {

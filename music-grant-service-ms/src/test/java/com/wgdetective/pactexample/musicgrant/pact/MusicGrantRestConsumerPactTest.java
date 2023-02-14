@@ -50,7 +50,6 @@ class MusicGrantRestConsumerPactTest {
                 .toPact();
     }
 
-
     @Pact(consumer = "User", provider = "music-grant-service-ms")
     RequestResponsePact addSong(final PactDslWithProvider builder) throws JsonProcessingException {
         AddSongDto addSongDto = new AddSongDto(TestData.author, TestData.name);
@@ -80,8 +79,9 @@ class MusicGrantRestConsumerPactTest {
         final RestTemplate restTemplate = new RestTemplateBuilder()
                 .rootUri(mockServer.getUrl())
                 .build();
-        assertThrows(HttpClientErrorException.class,
-                () -> new AddSongTestService(restTemplate).addSong(TestData.getAddSongDto()));
+        final var service = new AddSongTestService(restTemplate);
+        final var songDto = TestData.getAddSongDto();
+        assertThrows(HttpClientErrorException.class, () -> service.addSong(songDto));
     }
 
     @Test

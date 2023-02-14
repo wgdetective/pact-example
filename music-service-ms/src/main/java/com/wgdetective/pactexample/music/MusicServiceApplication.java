@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MusicServiceApplication {
 
     public static void main(final String[] args) {
-        //Hooks.onOperatorDebug();
         SpringApplication.run(MusicServiceApplication.class, args);
     }
 

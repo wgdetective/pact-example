@@ -18,7 +18,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 @ActiveProfiles("local")
-public class MusicGrantServiceUserStoriesTests {
+class MusicGrantServiceUserStoriesTests {
 
     @Autowired
     private WebTestClient client;

@@ -48,7 +48,7 @@ class MusicRestProviderPactTest {
         context.setTarget(new HttpTestTarget("localhost", port, "music-service-ms"));
     }
 
-    @Disabled
+    @Disabled("Disabled to allow make build when pact hasn't yet been published")
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void verifyPact(final PactVerificationContext context) {

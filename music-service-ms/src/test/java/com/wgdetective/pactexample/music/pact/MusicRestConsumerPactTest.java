@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class MusicRestConsumerPactTest {
 
     @Pact(consumer = "User", provider = "music-service-ms")
-    V4Pact getNonExistingSong(final PactBuilder builder) throws JsonProcessingException {
+    V4Pact getNonExistingSong(final PactBuilder builder) {
         return builder.given("song does not exist")
                 .expectsToReceiveHttpInteraction("get song", http -> http
                         .withRequest(request -> request.method("GET")
@@ -65,8 +65,8 @@ class MusicRestConsumerPactTest {
         final RestTemplate restTemplate = new RestTemplateBuilder()
                 .rootUri(mockServer.getUrl())
                 .build();
-        assertThrows(HttpClientErrorException.class,
-                () -> new SongTestService(restTemplate).getSong());
+        final var service = new SongTestService(restTemplate);
+        assertThrows(HttpClientErrorException.class, service::getSong);
     }
 
     @Test
