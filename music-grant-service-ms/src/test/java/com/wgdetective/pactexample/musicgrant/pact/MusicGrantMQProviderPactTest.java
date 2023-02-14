@@ -14,7 +14,6 @@ import au.com.dius.pact.provider.junitsupport.loader.PactBroker;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wgdetective.pactexample.musicgrant.dto.event.AddSongEvent;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
