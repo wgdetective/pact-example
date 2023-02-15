@@ -108,7 +108,7 @@ tasks.asciidoctor {
 }
 
 tasks.register("copyPacts", Copy::class) {
-    from("build/pacts/")
+    from("${project.buildDir}/pacts/")
     into("src/test/resources/pacts/")
 }
 
@@ -132,7 +132,7 @@ fun getGitBranch() : String {
 
 //pact {
 //    publish {
-//        pactDirectory = "build/pacts/"
+//        pactDirectory = "${project.buildDir}/pacts/"
 //        pactBrokerUrl = "http://localhost:9292/"
 //        tags = listOf(getGitBranch(), "test", "prod")
 //        consumerVersion = "0.0.1-SNAPSHOT"
