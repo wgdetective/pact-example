@@ -16,8 +16,9 @@ public class RecommendationService {
 
     private final SongRepository songRepository;
 
+    private final Random random = new Random();
+
     public Mono<Song> recommendSong() {
-        final var random = new Random();
         return songRepository.count()
                 .flatMap(size -> songRepository.findAll()
                         .switchIfEmpty(Flux.error(new SongNotFoundException()))

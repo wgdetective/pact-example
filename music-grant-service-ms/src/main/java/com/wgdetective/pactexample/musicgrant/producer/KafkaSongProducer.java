@@ -29,7 +29,7 @@ public class KafkaSongProducer implements SongProducer {
     }
 
     public void send(final Song song) {
-        log.info(String.format("send to topic=%s, %s=%s,", topic, Song.class.getSimpleName(), song));
+        log.info(String.format("send to topic=%s, %s=%s,", topic, AddSongEvent.class.getSimpleName(), song));
         reactiveKafkaProducerTemplate.send(topic, mapper.map(song))
                 .doOnSuccess(senderResult -> log.info(
                         String.format("sent %s offset : %s", song, senderResult.recordMetadata().offset())))

@@ -3,7 +3,6 @@ package com.wgdetective.pactexample.music.controller;
 import com.wgdetective.pactexample.music.controller.mapper.SongDtoMapper;
 import com.wgdetective.pactexample.music.dto.rest.SongDto;
 import com.wgdetective.pactexample.music.exception.SongNotFoundException;
-import com.wgdetective.pactexample.music.service.RecommendationService;
 import com.wgdetective.pactexample.music.service.SongService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

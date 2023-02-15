@@ -14,7 +14,6 @@ import au.com.dius.pact.provider.junitsupport.loader.PactBroker;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wgdetective.pactexample.musicgrant.dto.event.AddSongEvent;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
@@ -28,7 +27,7 @@ import org.springframework.test.context.ActiveProfiles;
 //@PactFolder("./pacts")
 class MusicGrantMQProviderPactTest {
 
-    @Disabled
+    @Disabled("Disabled to allow make build when pact hasn't yet been published")
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void testTemplate(final Pact pact, final Interaction interaction, final PactVerificationContext context) {

@@ -2,7 +2,6 @@ package com.wgdetective.pactexample.musicgrant.pact.service;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.wgdetective.pactexample.musicgrant.dto.rest.SongDto;
-import com.wgdetective.pactexample.musicgrant.pact.service.AddSongTestService;
 import com.wgdetective.pactexample.musicgrant.util.TestData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,5 +1,7 @@
 package com.wgdetective.pactexample.music.pact;
 
+import java.util.List;
+
 import au.com.dius.pact.provider.junit5.HttpTestTarget;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
 import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvider;
@@ -21,8 +23,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
@@ -48,7 +48,7 @@ class MusicRestProviderPactTest {
         context.setTarget(new HttpTestTarget("localhost", port, "music-service-ms"));
     }
 
-    @Disabled
+    @Disabled("Disabled to allow make build when pact hasn't yet been published")
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void verifyPact(final PactVerificationContext context) {
