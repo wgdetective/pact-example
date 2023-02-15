@@ -3,7 +3,6 @@ package com.wgdetective.pactexample.musicgrant.producer;
 import com.wgdetective.pactexample.musicgrant.dto.event.AddSongEvent;
 import com.wgdetective.pactexample.musicgrant.model.Song;
 import com.wgdetective.pactexample.musicgrant.producer.mapper.SongEventMapper;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Log
-@RequiredArgsConstructor
 @Profile("kafka")
 public class KafkaSongProducer implements SongProducer {
 
@@ -20,8 +18,15 @@ public class KafkaSongProducer implements SongProducer {
 
     private final SongEventMapper mapper;
 
-    @Value(value = "${musicgrant.kafka.song-topic}")
-    private String topic;
+    private final String topic;
+
+    public KafkaSongProducer(ReactiveKafkaProducerTemplate<String, AddSongEvent> reactiveKafkaProducerTemplate,
+                             SongEventMapper mapper,
+                             @Value(value = "${musicgrant.kafka.song-topic}") String topic) {
+        this.reactiveKafkaProducerTemplate = reactiveKafkaProducerTemplate;
+        this.mapper = mapper;
+        this.topic = topic;
+    }
 
     public void send(final Song song) {
         log.info(String.format("send to topic=%s, %s=%s,", topic, Song.class.getSimpleName(), song));
