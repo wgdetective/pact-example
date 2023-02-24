@@ -9,10 +9,8 @@ import au.com.dius.pact.provider.junitsupport.Consumer;
 import au.com.dius.pact.provider.junitsupport.Provider;
 import au.com.dius.pact.provider.junitsupport.State;
 import au.com.dius.pact.provider.junitsupport.loader.PactBroker;
-import com.wgdetective.pactexample.music.exception.SongNotFoundException;
-import com.wgdetective.pactexample.music.model.Song;
+import com.wgdetective.pactexample.music.entity.DBSongEntity;
 import com.wgdetective.pactexample.music.repository.DBSongRepository;
-import com.wgdetective.pactexample.music.service.SongService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestTemplate;
@@ -33,13 +31,13 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MusicRestProviderPactTest {
+
     @LocalServerPort
     private int port;
 
     @MockBean
-    private SongService songService;
-    @MockBean
     private DBSongRepository songRepository;
+
     @MockBean
     private R2dbcScriptDatabaseInitializer r2dbcScriptDatabaseInitializer;
 
@@ -58,13 +56,18 @@ class MusicRestProviderPactTest {
 
     @State("song exists")
     void songDoesExist() {
-        when(songService.findById(anyLong()))
-                .thenReturn(Mono.just(new Song(1L, "Rick Astley", "Never Gonna Give You Up")));
+        final var entity = new DBSongEntity();
+        entity.setId(1L);
+        entity.setAuthor("Rick Astley");
+        entity.setName("Never Gonna Give You Up");
+
+        when(songRepository.findById(anyLong()))
+                .thenReturn(Mono.just(entity));
     }
 
     @State("song does not exist")
     void songDoesNotExist() {
-        when(songService.findById(anyLong()))
-                .thenReturn(Mono.error(new SongNotFoundException()));
+        when(songRepository.findById(anyLong()))
+                .thenReturn(Mono.empty());
     }
 }
